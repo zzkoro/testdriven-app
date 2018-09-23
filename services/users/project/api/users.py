@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
 
-users_blueprint = Blueprint('usres', __name__)
+users_blueprint = Blueprint('users', __name__)
 
 @users_blueprint.route('/users/ping', method=['GET'])
 def ping_pong():
