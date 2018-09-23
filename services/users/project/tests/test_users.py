@@ -21,7 +21,7 @@ class TestUserService(BaseTestCase):
                 '/users',
                 data=json.dumps({
                     'username': 'michael',
-                    'email': 'michae;@mherman.org'
+                    'email': 'michael@mherman.org'
                 }),
                 content_type='application/json',
             )
