@@ -4,7 +4,7 @@ from project.api.models import  User
 
 users_blueprint = Blueprint('users', __name__)
 
-@users_blueprint.route('/users/ping', method=['GET'])
+@users_blueprint.route('/users/ping', methods=['GET'])
 def ping_pong():
     return jsonify({
         'status': 'success',
