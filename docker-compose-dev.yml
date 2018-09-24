@@ -38,6 +38,7 @@ services:
       - 9090:80
     depends_on:
       - users
+      - client
 
   client:
     build:
@@ -50,7 +51,7 @@ services:
       - 3007:3000
     environment:
       - NODE_ENV=development
-      - REACT_APP_USERS_SERVICE_URL=${REACT_APP_USERS_SERVICE_URL}
+      - REACT_APP_USERS_SERVICE_URL=http://221.167.111.48:39090
     depends_on:
       - users
 
