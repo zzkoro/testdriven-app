@@ -32,7 +32,7 @@
                 <ol>
                     {% for user in users %}
                     <li>{{user.username}}</li>
-                    <% endfor %>
+                    {% endfor %}
                 </ol>
                 {% else %}
                     <p>No users!</p>
