@@ -59,6 +59,23 @@ class TestUserService(BaseTestCase):
             self.assertIn('Invalid payload', data['message'])
             self.assertIn('fail', data['code'])
 
+    def test_add_user_invalid_json_keys_no_password(self):
+        """Ensure error is thrown if the JSON object does not have a password key."""
+        with self.client:
+            response = self.client.post(
+                '/users',
+                data=json.dumps(
+                        {
+                            'username': 'michael',
+                            'email': 'michael@mherman.org',
+                        }),
+                content_type='application/json',
+            )
+            data = json.loads(response.data.decode())
+            self.assertEqual(response.status_code, 400)
+            self.assertIn('Invalid payload', data['message'])
+            self.assertIn('fail', data['code'])
+
     def test_add_user_duplicate_email(self):
         """Ensure error is thrown if the email already exists."""
         with self.client:
