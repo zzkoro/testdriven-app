@@ -24,6 +24,7 @@ class App extends Component {
     addUser(event) {
         event.preventDefault();
         console.log('sanity check!');
+        console.log(this);
     }
 
     render() {
