@@ -69,9 +69,14 @@ def get_single_user(user_id):
 
 
 
-@users_blueprint.route('/users', methods=['GET'])
+@users_blueprint.route('/users', methods=['GET', 'POST'])
 def get_all_users():
     """Get all users"""
+    if request.method == 'POST':
+        username = request.form['username']
+        email = request.form['email']
+        db.session.add(User(username=username, email=email))
+        db.session.commit()
     response_object = {
         'status': 'success',
         'data': {
