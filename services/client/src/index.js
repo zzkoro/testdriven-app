@@ -40,6 +40,7 @@ class App extends Component {
                 this.getUsers();
                 this.setState({username:'', email:''});
                 console.log(res);
+                console.log(res.data);
             })
             .catch((err) => { console.log(err); });
     };
