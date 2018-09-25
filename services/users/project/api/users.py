@@ -8,7 +8,7 @@ users_blueprint = Blueprint('users', __name__, template_folder='./templates')
 @users_blueprint.route('/users/ping', methods=['GET'])
 def ping_pong():
     return jsonify({
-        'status': 'success',
+        'code': 'success',
         'message': 'pong!'
 
     })
@@ -17,8 +17,8 @@ def ping_pong():
 def get_all_users():
     """Get all users"""
     response_object = {
-        'status': 'success',
-        'data': {
+        'code': 'success',
+        'result': {
             'users': [user.to_json() for user in User.query.all()]
         }
     }
@@ -28,7 +28,7 @@ def get_all_users():
 def add_user():
     post_data = request.get_json()
     response_object = {
-        'status': 'fail',
+        'code': 'fail',
         'message': 'Invalid payload.'
     }
     if not post_data:
@@ -41,7 +41,7 @@ def add_user():
         if not user:
             db.session.add(User(username=username, email=email))
             db.session.commit()
-            response_object['status'] = 'success'
+            response_object['code'] = 'success'
             response_object['message'] = f'{email} was added!'
             return jsonify(response_object), 201
         else:
@@ -55,7 +55,7 @@ def add_user():
 def get_single_user(user_id):
     """Get single user details"""
     response_object = {
-        'status': 'fail',
+        'code': 'fail',
         'message': 'User does not exist'
     }
     try:
@@ -64,8 +64,8 @@ def get_single_user(user_id):
             return jsonify(response_object), 404
         else:
             response_object = {
-                'status': 'success',
-                'data': {
+                'code': 'success',
+                'result': {
                     'id': user.id,
                     'username': user.username,
                     'email': user.email,

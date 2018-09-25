@@ -21,7 +21,7 @@ class App extends Component {
     }
     getUsers() {
         axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/users`)
-            .then((res) => { this.setState({users: res.data.data.users }); })
+            .then((res) => { this.setState({users: res.data.result.users }); })
             .catch((err) => { console.log(err); });
     }
     addUser(event) {
@@ -40,7 +40,6 @@ class App extends Component {
                 this.getUsers();
                 this.setState({username:'', email:''});
                 console.log(res);
-                console.log(res.data);
             })
             .catch((err) => { console.log(err); });
     };
