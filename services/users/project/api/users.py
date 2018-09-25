@@ -13,6 +13,17 @@ def ping_pong():
 
     })
 
+@users_blueprint.route('/users', methods=['GET'])
+def get_all_users():
+    """Get all users"""
+    response_object = {
+        'status': 'success',
+        'data': {
+            'users': [user.to_json() for user in User.query.all()]
+        }
+    }
+    return jsonify(response_object), 200
+
 @users_blueprint.route('/users', methods=['POST'])
 def add_user():
     post_data = request.get_json()
@@ -66,24 +77,6 @@ def get_single_user(user_id):
         return jsonify(response_object), 404
     except exc.DataError as e:
         return jsonify(response_object), 404
-
-
-
-@users_blueprint.route('/users', methods=['GET', 'POST'])
-def get_all_users():
-    """Get all users"""
-    if request.method == 'POST':
-        username = request.form['username']
-        email = request.form['email']
-        db.session.add(User(username=username, email=email))
-        db.session.commit()
-    response_object = {
-        'status': 'success',
-        'data': {
-            'users': [user.to_json() for user in User.query.all()]
-        }
-    }
-    return jsonify(response_object), 200
 
 
 @users_blueprint.route('/', methods=['GET', 'POST'])
