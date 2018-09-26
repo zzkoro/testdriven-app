@@ -26,7 +26,7 @@ class TestAuthService(BaseTestCase):
             self.assertTrue(data['auth_token'])
             self.assertTrue(response.content_type == 'application/json')
             self.assertEqual(response.status_code, 201)
-            self.assertIn('michael@mherman.org was added!', data['message'])
+            self.assertIn('Successfully registered.', data['message'])
             self.assertIn('success', data['code'])
 
     def test_user_registration_duplicate_email(self):
