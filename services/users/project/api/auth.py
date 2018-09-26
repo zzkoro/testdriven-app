@@ -32,7 +32,8 @@ def register_user():
             # generate auth token
             auth_token = new_user.encode_auth_token(new_user.id)
             response_object['code'] = 'success'
-            response_object['message'] = 'Successfully registered'
+            response_object['message'] = 'Successfully registered.'
+            response_object['auth_token'] = auth_token.decode()
             return jsonify(response_object), 201
         else:
             response_object['message'] = 'Sorry, That user already exists.'
