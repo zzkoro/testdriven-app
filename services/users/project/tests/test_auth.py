@@ -228,5 +228,42 @@ class TestAuthService(BaseTestCase):
             )
             self.assertEqual(response.status_code, 401)
 
+    def test_user_status(self):
+        add_user('test', 'test@test.com', 'test')
+        with self.client:
+            # user login
+            resp_login = self.client.post(
+                '/auth/login',
+                data=json.dumps({
+                    'email': 'test@test.com',
+                    'password': 'test'
+                }),
+                content_type='application/json',
+            )
+            token = json.loads(resp_login.data.decode())['auth_token']
+            response = self.client.get(
+                '/auth/status',
+                headers={'Authorization': f'Bearer {token}'}
+            )
+            data = json.loads(response.data.decode())
+            self.assertTrue(data['code'] == 'success')
+            self.assertTrue(data['result'] is not None)
+            self.assertTrue(data['result']['username'] == 'test')
+            self.assertTrue(data['result']['email'] == 'test@test.com')
+            self.assertTrue(data['result']['active'] is True)
+            self.assertEqual(response.status_code, 200)
+
+    def test_invalid_status(self):
+        with self.client:
+            response = self.client.get(
+                '/auth/status',
+                headers={'Authorization': 'Bearer invalid'}
+            )
+            data = json.loads(response.data.decode())
+            self.assertTrue(data['code'] == 'fail')
+            self.assertTrue(data['message'] == 'Invalid token. Please log in again.')
+            self.assertEqual(response.status_code, 401)
+
+
 if __name__ == '__main__':
     unittest.main()
