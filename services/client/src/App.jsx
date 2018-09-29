@@ -117,7 +117,7 @@ class App extends Component {
                                   <Form
                                       formType={'Register'}
                                       formData={this.state.formData}
-                                      handlerUserFormSubmit={this.handleUserFormSubmit}
+                                      handleUserFormSubmit={this.handleUserFormSubmit}
                                       handleFormChange={this.handleFormChange}
                                   />
                               )} />
@@ -125,7 +125,7 @@ class App extends Component {
                                   <Form
                                       formType={'Login'}
                                       formData={this.state.formData}
-                                      handlerUserFormSubmit={this.handleUserFormSubmit}
+                                      handleUserFormSubmit={this.handleUserFormSubmit}
                                       handleFormChange={this.handleFormChange}
                                   />
                               )} />
