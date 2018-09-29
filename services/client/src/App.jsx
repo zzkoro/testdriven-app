@@ -5,6 +5,7 @@ import UsersList from './components/UsersList';
 import AddUser from './components/AddUser';
 import About from './components/About';
 import NavBar from './components/NavBar';
+import Form from './components/Form';
 
 class App extends Component {
     // eslint-disable-next-line
