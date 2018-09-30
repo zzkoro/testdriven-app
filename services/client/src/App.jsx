@@ -27,6 +27,7 @@ class App extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleUserFormSubmit = this.handleUserFormSubmit.bind(this);
         this.handleFormChange = this.handleFormChange.bind(this);
+        this.logoutUser = this.logoutUser.bind(this);
     };
     componentDidMount() {
         this.getUsers()
@@ -94,6 +95,10 @@ class App extends Component {
             email: ''
         });
     };
+    logoutUser() {
+        window.localStorage.clear();
+        this.setState({isAuthenticated: false});
+    };
 
 
     render() {
@@ -141,6 +146,13 @@ class App extends Component {
                                       isAuthenticated={this.state.isAuthenticated}
                                   />
                               )} />
+                              <Route exact path="/logout" render={() => (
+                                  <Logout
+                                      logoutUser={this.logoutUser}
+                                      isAuthenticated={this.state.isAuthenticated}
+                                  />
+                              )} />
+                              <Route exact path="/status" component={UserStatus}/>
 
                           </Switch>
                       </div>
