@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 class UserStatus extends Component {
     constructor (props) {
@@ -11,7 +12,9 @@ class UserStatus extends Component {
         };
     };
     componentDidMount() {
-        this.getUserStatus();
+        if (this.props.isAuthenticated) {
+            this.getUserStatus();
+        }
     };
     getUserStatus(event) {
         const options = {
@@ -23,13 +26,29 @@ class UserStatus extends Component {
             }
         };
         return axios(options)
-            .then((res) => { console.log(res.data.result) })
+            .then((res) => {
+                console.log(res.data.result)
+                this.setState({
+                    email: res.data.result.email,
+                    id: res.data.result.id,
+                    username: res.data.result.username
+                })
+            })
             .catch((error) => { console.log(error) });
     };
     render() {
+        if (!this.props.isAuthenticated) {
+            return (
+                <p>You must be logged in to view this. Click <Link to="/login">here</Link> to log back. in.</p>
+            )
+        };
         return (
             <div>
-                <p>test</p>
+                <ul>
+                    <li><strong>User ID:</strong> {this.state.id} </li>
+                    <li><strong>Email:</strong> {this.state.email} </li>
+                    <li><strong>Username:</strong> {this.state.username} </li>
+                </ul>
             </div>
         )
     };
