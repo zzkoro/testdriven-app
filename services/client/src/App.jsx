@@ -61,7 +61,6 @@ class App extends Component {
     };
     handleUserFormSubmit(event) {
         event.preventDefault();
-        console.log('sanity check!')
         const formType =  window.location.href.split('/').reverse()[0];
         let data = {
             email: this.state.formData.email,
@@ -73,17 +72,26 @@ class App extends Component {
         const url = `${process.env.REACT_APP_USERS_SERVICE_URL}/auth/${formType}`;
         axios.post(url, data)
             .then((res) => {
-            console.log(res.data);
+                console.log(res.data);
+                this.clearFormState();
+                window.localStorage.setItem('authToken', res.data.auth_token);
             })
             .catch((err) => {
-            console.log(err);
+                console.log(err);
             });
     };
     handleFormChange(event) {
         const obj = this.state.formData;
         obj[event.target.name] = event.target.value;
         this.setState(obj);
-    }
+    };
+    clearFormState() {
+        this.setState({
+            formData: { username: '', email: '', password: ''},
+            username: '',
+            email: ''
+        });
+    };
 
 
     render() {
