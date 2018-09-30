@@ -70,7 +70,7 @@ class App extends Component {
         if (formType === 'register') {
             data.username = this.state.formData.username;
         }
-        const url = `{process.env.REACT_APP_USERS_SERVICE_URL}/auth/${formType}`;
+        const url = `${process.env.REACT_APP_USERS_SERVICE_URL}/auth/${formType}`;
         axios.post(url, data)
             .then((res) => {
             console.log(res.data);
