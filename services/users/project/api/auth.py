@@ -90,6 +90,6 @@ def get_user_status(resp):
     response_object = {
         'code': 'success',
         'message': 'success',
-        'result': user.to_json
+        'result': user.to_json()
     }
     return jsonify(response_object), 200
