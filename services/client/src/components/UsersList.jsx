@@ -25,7 +25,6 @@ const UsersList = (props) => {
                             <td>{user.username}</td>
                             <td>{String(user.active)}</td>
                             <td>{String(user.admin)}</td>
-                            className="box title is-4"
                         </tr>
                     )
                 })
