@@ -30,7 +30,8 @@ class User(db.Model):
             'username': self.username,
             'email': self.email,
             'active': self.active,
-            'password': self.password
+            'password': self.password,
+            'admin': self.admin
         }
 
     def encode_auth_token(self, user_id):

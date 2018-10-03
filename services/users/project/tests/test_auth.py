@@ -252,6 +252,7 @@ class TestAuthService(BaseTestCase):
             self.assertTrue(data['result']['username'] == 'test')
             self.assertTrue(data['result']['email'] == 'test@test.com')
             self.assertTrue(data['result']['active'] is True)
+            self.assertFalse(data['result']['admin'])
             self.assertEqual(response.status_code, 200)
 
     def test_invalid_status(self):

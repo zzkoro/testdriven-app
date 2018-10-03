@@ -145,8 +145,12 @@ class TestUserService(BaseTestCase):
             self.assertEqual(len(data['result']['users']), 2)
             self.assertIn('michael', data['result']['users'][0]['username'])
             self.assertIn('michael@mherman.org', data['result']['users'][0]['email'])
+            self.assertTrue(data['result']['users'][0]['active'])
+            self.assertFalse(data['result']['users'][0]['admin'])
             self.assertIn('fletcher', data['result']['users'][1]['username'])
             self.assertIn('fletcher@notreal.com', data['result']['users'][1]['email'])
+            self.assertTrue(data['result']['users'][1]['active'])
+            self.assertFalse(data['result']['users'][1]['admin'])
             self.assertIn('success', data['code'])
 
     def test_main_no_users(self):
@@ -212,6 +216,37 @@ class TestUserService(BaseTestCase):
             self.assertTrue(data['code'] == 'fail')
             self.assertTrue(data['message'] == 'Provide a valid auth token.')
             self.assertEqual(response.status_code, 401)
+
+    def test_add_user_not_admin(self):
+        add_user('test', 'test@test.com', 'test')
+        with self.client:
+            # user login
+            resp_login = self.client.post(
+                '/auth/login',
+                data=json.dumps({
+                    'email': 'test@test.com',
+                    'password': 'test'
+                }),
+                content_type='application/json'
+            )
+            token = json.loads(resp_login.data.decode())['auth_token']
+            response = self.client.post(
+                '/users',
+                data=json.dumps({
+                    'username': 'michael',
+                    'email': 'michael@sonotreal.com',
+                    'password': 'test'
+                }),
+                content_type='application/json',
+                headers={'Authorization': f'Bearer {token}'}
+            )
+            data = json.loads(response.data.decode())
+            self.assertTrue(data['code'] == 'fail')
+            self.assertTrue(
+                data['message'] == 'You do not have permission to do that.'
+            )
+            self.assertEqual(response.status_code, 401)
+
 
 
 if __name__ == '__main__':
