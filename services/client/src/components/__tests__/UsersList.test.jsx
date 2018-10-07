@@ -7,6 +7,7 @@ import renderer from 'react-test-renderer'
 const users = [
     {
         'active': true,
+        'admin': false,
         'email': 'hermanmu@gmail.com',
         'id': 1,
         'username': 'michael'
@@ -14,6 +15,7 @@ const users = [
     },
     {
         'active': true,
+        'admin': false,
         'email': 'michael@mherman.org',
         'id': 2,
         'username': 'michaelherman'
@@ -22,10 +24,22 @@ const users = [
 
 test('UsersList renders properly', () => {
     const wrapper = shallow(<UsersList users={users}/>);
-    const element = wrapper.find('h4');
     expect(wrapper.find('h1').get(0).props.children).toBe('All Users');
-    expect(element.length).toBe(2);
-    expect(element.get(0).props.children).toBe('michael');
+    // table
+    const table = wrapper.find('table');
+    expect(table.length).toBe(1);
+    // table head
+    expect(wrapper.find('thead').length).toBe(1);
+    const th = wrapper.find('th');
+    expect(th.length).toBe(5);
+    expect(th.get(0).props.children).toBe('ID');
+    // table body
+    expect(wrapper.find('tbody').length).toBe(1);
+    expect(wrapper.find('tbody > tr').length).toBe(2);
+    const td = wrapper.find('tbody > tr > td');
+    expect(td.length).toBe(10);
+    expect(td.get(0).props.children).toBe(1);
+    expect(td.get(1).props.children).toBe('hermanmu@gmail.com');
 });
 
 test('UsersList renders a snapshot properly', () => {
