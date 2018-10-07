@@ -13,7 +13,7 @@ class Form extends Component {
             }
         };
         this.handleUserFormSubmit = this.handleUserFormSubmit.bind(this);
-        this.handleFormChange = this.handleFormChange(this);
+        this.handleFormChange = this.handleFormChange.bind(this);
     };
     componentDidMount() {
         this.clearForm();
