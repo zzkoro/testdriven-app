@@ -7,6 +7,7 @@ import NavBar from './components/NavBar';
 import Form from './components/forms/Form';
 import UserStatus from './components/UserStatus';
 import Logout from './components/Logout';
+import Message from './components/Message';
 
 class App extends Component {
     // eslint-disable-next-line
@@ -16,6 +17,8 @@ class App extends Component {
             users: [],
             title: 'TestDriven.io',
             isAuthenticated: false,
+            messageName: null,
+            messageType: null,
         };
         this.logoutUser = this.logoutUser.bind(this);
         this.loginUser = this.loginUser.bind(this);
@@ -26,7 +29,8 @@ class App extends Component {
         };
     };
     componentDidMount() {
-        this.getUsers()
+        this.getUsers();
+        this.createMessage();
     }
     getUsers() {
         axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/users`)
@@ -61,6 +65,12 @@ class App extends Component {
         window.localStorage.clear();
         this.setState({isAuthenticated: false});
     };
+    createMessage(name='Sanity Check', type='success') {
+        this.setState({
+            messageName: name,
+            messageType: type
+        });
+    };
     render() {
         return (
             <div>
@@ -70,6 +80,12 @@ class App extends Component {
             />
           <section className="section">
               <div className="container">
+                  {this.state.messageName && this.state.messageType &&
+                    <Message
+                        messageName={this.state.messageName}
+                        messageType={this.state.messageType}
+                    />
+                  }
                   <div className="columns">
                       <div className="column is-half">
                           <br/>
