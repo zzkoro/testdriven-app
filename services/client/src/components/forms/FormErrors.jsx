@@ -8,7 +8,7 @@ const FormErrors = (props) => {
             <ul className="validation-list">
                 {
                     props.formRules.map((rule) => {
-                        return <li classname={rule.valid ? "success" : "error"} key={rule.id}>{rule.name}</li>
+                        return <li className={rule.valid ? "success" : "error"} key={rule.id}>{rule.name}</li>
                     })
                 }
             </ul>
