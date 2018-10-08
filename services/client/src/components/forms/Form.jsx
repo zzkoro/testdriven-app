@@ -79,7 +79,7 @@ class Form extends Component {
             if (formData.username.length > 5) formRules[0].valid = true;
             if (formData.email.length > 5) formRules[1].valid = true;
             if (this.validateEmail(formData.email)) formRules[2].valid = true;
-            if (formData.password.length > 10) formRules[3].valid = true;
+            if (formData.password.length > 3) formRules[3].valid = true;
             self.setState({registerFormRules: formRules});
             if (self.allTrue()) self.setState({valid: true});
         }

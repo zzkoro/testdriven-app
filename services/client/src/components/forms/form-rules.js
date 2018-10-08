@@ -23,7 +23,7 @@ export const registerFormRules = [
     {
         id: 4,
         field: 'password',
-        name: 'Password must be greater than 10 charaters.',
+        name: 'Password must be greater than 3 charaters.',
         valid: false
     }
 ];
