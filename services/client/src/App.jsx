@@ -4,7 +4,7 @@ import axios from 'axios'
 import UsersList from './components/UsersList';
 import About from './components/About';
 import NavBar from './components/NavBar';
-import Form from './components/Form';
+import Form from './components/forms/Form';
 import UserStatus from './components/UserStatus';
 import Logout from './components/Logout';
 
