@@ -31,3 +31,11 @@ li:before {
     content: "\2713";
     color: #23D160;
 }
+
+.notification {
+    -webkit-transition: display .35s ease-in-out;
+    -moz-transition: display .35s ease-in-out;
+    -ms-transition: display .35s ease-in-out;
+    -o-transition: display .35s ease-in-out;
+    transition: display .35s ease-in-out;
+}
