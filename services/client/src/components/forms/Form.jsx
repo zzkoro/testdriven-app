@@ -91,8 +91,8 @@ class Form extends Component {
         // validate login form
         if (self.props.formType === 'Login') {
             const formRules = self.state.loginFormRules;
-            if (formData.email.length > 0) formRules[0].valid = true;
-            if (formData.password.length > 0) formRules[1].valid = true;
+            if (formData.email.length > 5) formRules[0].valid = true;
+            if (formData.password.length > 3) formRules[1].valid = true;
             self.setState({loginFormRules: formRules});
             if (self.allTrue()) self.setState({valid: true});
         }

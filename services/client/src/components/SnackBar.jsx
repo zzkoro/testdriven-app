@@ -37,6 +37,7 @@ class SnackBar extends Component {
         // After 3 seconds, remove the show class from DIV
         setTimeout(() => {
             x.className = x.className.replace("show", "");
+            this.props.removeSnackMessage();
         }, 3000);
     };
 

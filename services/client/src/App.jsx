@@ -26,6 +26,7 @@ class App extends Component {
         this.loginUser = this.loginUser.bind(this);
         this.createMessage = this.createMessage.bind(this);
         this.removeMessage = this.removeMessage.bind(this);
+        this.removeSnackMessage = this.removeSnackMessage.bind(this);
     };
     componentWillMount() {
         if (window.localStorage.getItem('authToken')) {
@@ -63,18 +64,26 @@ class App extends Component {
         window.localStorage.setItem('authToken', token);
         this.setState({ isAuthenticated: true });
         this.getUsers();
-        this.createMessage('Welcome!', 'success');
+        //this.createMessage('Welcome!', 'success');
+        this.createSnackMessage('Welcome!');
     };
     logoutUser() {
         window.localStorage.clear();
         this.setState({isAuthenticated: false});
-        this.createMessage('Bye Bye!', 'success');
+        //this.createMessage('Bye Bye!', 'success');
+        this.createSnackMessage('Bye Bye!');
     };
-    createMessage(name='Sanity Check', type='success') {
+    createSnackMessage(msg) {
         this.setState({
-            snackMessage: name
+            snackMessage: msg
         });
-        /**
+    };
+    removeSnackMessage() {
+        this.setState({
+            snackMessage: null,
+        });
+    }
+    createMessage(name='Sanity Check', type='success') {
         this.setState({
             messageName: name,
             messageType: type
@@ -82,13 +91,11 @@ class App extends Component {
         setTimeout(() => {
            this.removeMessage();
         }, 3000);
-         **/
     };
     removeMessage() {
         this.setState({
             messageName: null,
             messageType: null,
-            snackMessage: null,
         });
     };
     render() {
@@ -150,7 +157,10 @@ class App extends Component {
                       </div>
                   </div>
               </div>
-              <SnackBar snackMessage={this.state.snackMessage} />
+              <SnackBar
+                  snackMessage={this.state.snackMessage}
+                  removeSnackMessage={this.removeSnackMessage}
+              />
           </section>
             </div>
         )
