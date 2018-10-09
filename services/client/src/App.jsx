@@ -79,10 +79,11 @@ class App extends Component {
         });
     };
     removeSnackMessage() {
+        console.log("removeSnackMessage called");
         this.setState({
             snackMessage: null,
         });
-    }
+    };
     createMessage(name='Sanity Check', type='success') {
         this.setState({
             messageName: name,

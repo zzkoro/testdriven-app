@@ -38,6 +38,7 @@ class SnackBar extends Component {
         setTimeout(() => {
             x.className = x.className.replace("show", "");
             this.props.removeSnackMessage();
+            console.log("SnackBar timedout");
         }, 3000);
     };
 
