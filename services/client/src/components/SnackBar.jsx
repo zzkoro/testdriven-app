@@ -4,7 +4,7 @@ import './SnackBar.css';
 
 class SnackBar extends Component {
 
-    constructor (props) {
+    constructor(props) {
       super(props);
     };
 
@@ -33,6 +33,7 @@ class SnackBar extends Component {
     };
 
     render() {
+        console.log("SnackBar render");
         return (
             <div id="snackbar">
                 <p>{this.props.snackMessage}</p>
