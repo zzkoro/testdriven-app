@@ -72,7 +72,7 @@ class App extends Component {
     };
     createMessage(name='Sanity Check', type='success') {
         this.setState({
-            snackMessasge: name
+            snackMessage: name
         });
         /**
         this.setState({
