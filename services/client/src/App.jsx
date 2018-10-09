@@ -65,13 +65,13 @@ class App extends Component {
         this.setState({ isAuthenticated: true });
         this.getUsers();
         //this.createMessage('Welcome!', 'success');
-        this.createSnackMessage('Welcome!');
+        this.createSnackMessage('안녕하세요. 환영합니다. !');
     };
     logoutUser() {
         window.localStorage.clear();
         this.setState({isAuthenticated: false});
         //this.createMessage('Bye Bye!', 'success');
-        this.createSnackMessage('Bye Bye!');
+        this.createSnackMessage('Bye Bye. 잘가요!');
     };
     createSnackMessage(msg) {
         this.setState({
