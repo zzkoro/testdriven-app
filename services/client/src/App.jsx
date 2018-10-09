@@ -8,6 +8,7 @@ import Form from './components/forms/Form';
 import UserStatus from './components/UserStatus';
 import Logout from './components/Logout';
 import Message from './components/Message';
+import SnackBar from './components/SnackBar';
 
 class App extends Component {
     // eslint-disable-next-line
@@ -19,6 +20,7 @@ class App extends Component {
             isAuthenticated: false,
             messageName: null,
             messageType: null,
+            snackMessage: null,
         };
         this.logoutUser = this.logoutUser.bind(this);
         this.loginUser = this.loginUser.bind(this);
@@ -69,17 +71,23 @@ class App extends Component {
     };
     createMessage(name='Sanity Check', type='success') {
         this.setState({
+            snackMessasge: name
+        });
+        /**
+        this.setState({
             messageName: name,
             messageType: type
         });
         setTimeout(() => {
            this.removeMessage();
         }, 3000);
+         **/
     };
     removeMessage() {
         this.setState({
             messageName: null,
-            messageType: null
+            messageType: null,
+            snackMessage: null,
         });
     };
     render() {
@@ -141,6 +149,7 @@ class App extends Component {
                       </div>
                   </div>
               </div>
+              <SnackBar snackMessage={this.state.snackMessage} />
           </section>
             </div>
         )
