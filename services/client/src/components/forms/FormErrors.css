@@ -33,9 +33,9 @@ li:before {
 }
 
 .notification {
-    -webkit-transition: display .35s ease-in-out;
-    -moz-transition: display .35s ease-in-out;
-    -ms-transition: display .35s ease-in-out;
-    -o-transition: display .35s ease-in-out;
-    transition: display .35s ease-in-out;
+    -webkit-transition: all .35s ease-in-out;
+    -moz-transition: all .35s ease-in-out;
+    -ms-transition: all .35s ease-in-out;
+    -o-transition: all .35s ease-in-out;
+    transition: all .35s ease-in-out;
 }
