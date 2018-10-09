@@ -55,7 +55,6 @@ class Form extends Component {
         if (formType === 'Register') {
             data.username = this.state.formData.username;
         }
-        ;
         const url = `${process.env.REACT_APP_USERS_SERVICE_URL}/auth/${formType.toLowerCase()}`;
         axios.post(url, data)
             .then((res) => {
@@ -64,6 +63,12 @@ class Form extends Component {
             })
             .catch((err) => {
                 console.log(err);
+                if (formType === 'Login') {
+                    this.props.createMessage('User does not exist.', 'danger');
+                }
+                if (formType === 'Register') {
+                    this.props.createMessage('That user already exists.', 'danger');
+                }
             });
     };
     validateForm() {

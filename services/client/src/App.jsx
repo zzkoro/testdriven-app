@@ -22,6 +22,8 @@ class App extends Component {
         };
         this.logoutUser = this.logoutUser.bind(this);
         this.loginUser = this.loginUser.bind(this);
+        this.createMessage = this.createMessage.bind(this);
+        this.removeMessage = this.removeMessage.bind(this);
     };
     componentWillMount() {
         if (window.localStorage.getItem('authToken')) {
@@ -30,7 +32,6 @@ class App extends Component {
     };
     componentDidMount() {
         this.getUsers();
-        this.createMessage();
     }
     getUsers() {
         axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/users`)
@@ -60,7 +61,8 @@ class App extends Component {
         window.localStorage.setItem('authToken', token);
         this.setState({ isAuthenticated: true });
         this.getUsers();
-    }
+        this.createMessage('Welcome!', 'success');
+    };
     logoutUser() {
         window.localStorage.clear();
         this.setState({isAuthenticated: false});
@@ -69,6 +71,15 @@ class App extends Component {
         this.setState({
             messageName: name,
             messageType: type
+        });
+        setTimeout(() => {
+           this.removeMessage();
+        }, 3000);
+    };
+    removeMessage() {
+        this.setState({
+            messageName: null,
+            messageType: null
         });
     };
     render() {
@@ -84,6 +95,7 @@ class App extends Component {
                     <Message
                         messageName={this.state.messageName}
                         messageType={this.state.messageType}
+                        removeMessage={this.removeMessage}
                     />
                   }
                   <div className="columns">
@@ -100,6 +112,7 @@ class App extends Component {
                                       formType={'Register'}
                                       loginUser={this.loginUser}
                                       isAuthenticated={this.state.isAuthenticated}
+                                      createMessage={this.createMessage}
                                   />
                               )} />
                               <Route exact path="/login" render={() => (
@@ -107,16 +120,21 @@ class App extends Component {
                                       formType={'Login'}
                                       loginUser={this.loginUser}
                                       isAuthenticated={this.state.isAuthenticated}
+                                      createMessage={this.createMessage}
                                   />
                               )} />
                               <Route exact path="/logout" render={() => (
                                   <Logout
                                       logoutUser={this.logoutUser}
                                       isAuthenticated={this.state.isAuthenticated}
+                                      createMessage={this.createMessage}
                                   />
                               )} />
                               <Route exact path="/status" render={() => (
-                                  <UserStatus isAuthenticated={this.state.isAuthenticated} />
+                                  <UserStatus
+                                      isAuthenticated={this.state.isAuthenticated}
+                                      createMessage={this.createMessage}
+                                  />
                               )} />
 
                           </Switch>
