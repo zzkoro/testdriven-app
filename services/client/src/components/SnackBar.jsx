@@ -12,9 +12,6 @@ class SnackBar extends Component {
 
     componentWillMount() {
         console.log("SnackBar componentWillMount");
-        if (this.props.snackMessage) {
-            this.showSnackBar();
-        }
     };
     componentDidMount() {
         console.log("SnackBar componentDidMount");

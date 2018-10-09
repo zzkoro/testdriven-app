@@ -9,6 +9,7 @@ import UserStatus from './components/UserStatus';
 import Logout from './components/Logout';
 import Message from './components/Message';
 import SnackBar from './components/SnackBar';
+import Spinner from './components/Spinner';
 
 class App extends Component {
     // eslint-disable-next-line
@@ -158,6 +159,7 @@ class App extends Component {
                       </div>
                   </div>
               </div>
+              <Spinner />
               <SnackBar
                   snackMessage={this.state.snackMessage}
                   removeSnackMessage={this.removeSnackMessage}
