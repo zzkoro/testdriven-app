@@ -2,12 +2,9 @@ import React, { Component } from 'react';
 import './Spinner.css';
 
 
-class c extends Component {
+class Spinner extends Component {
     constructor(props) {
       super(props);
-      this.state = {
-          snackMessage: null
-      };
     };
 
     componentWillMount() {
@@ -33,4 +30,4 @@ class c extends Component {
     };
 };
 
-export default SnackBar;
+export default Spinner;
