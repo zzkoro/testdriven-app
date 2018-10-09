@@ -33,7 +33,7 @@ class SnackBar extends Component {
     };
 
     render() {
-        console.log("SnackBar render");
+        console.log("SnackBar render: `${this.props.snackMessage}`");
         return (
             <div id="snackbar">
                 <p>{this.props.snackMessage}</p>
