@@ -20,6 +20,12 @@ class SnackBar extends Component {
         console.log("SnackBar componentDidMount");
 
     };
+    componentDidUpdate() {
+        console.log("SnackBar componentDidUpdate");
+        if (this.props.snackMessage) {
+            this.showSnackBar();
+        }
+    };
 
     showSnackBar() {
         // Get the snackbar DIV
