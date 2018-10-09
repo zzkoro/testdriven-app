@@ -3,9 +3,11 @@ import './SnackBar.css';
 
 
 class SnackBar extends Component {
-
     constructor(props) {
       super(props);
+      this.state = {
+          snackMessage: null
+      };
     };
 
     componentWillMount() {
