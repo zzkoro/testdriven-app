@@ -68,6 +68,7 @@ class App extends Component {
     logoutUser() {
         window.localStorage.clear();
         this.setState({isAuthenticated: false});
+        this.createMessage('Bye Bye!', 'success');
     };
     createMessage(name='Sanity Check', type='success') {
         this.setState({
