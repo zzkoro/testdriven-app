@@ -56,3 +56,13 @@ services:
     depends_on:
       - users
 
+  swagger:
+    build:
+      context: ./services/swagger
+      dockerfile: Dockerfile-dev
+    ports:
+      - 3008:8888
+    environment:
+      - URL=https://petstore.swagger.io/v2/swagger.json
+    depends_on:
+      - users
